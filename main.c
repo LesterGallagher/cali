@@ -5,26 +5,8 @@
 
 #include "CMemLeak.h"
 
-#define list_base       \
-    struct {            \
-        size_t cap, len;\
-    }
-
-#define list(T)         \
-    struct list_##T {   \
-        list_base;      \
-        T data[];       \
-    }
-
-
-#define list_new(T)																\
-	({																				\
-		const size_t initial_size = 16;												\
-		struct list_##T *v = malloc(sizeof(list(int)) + sizeof(T) * initial_size);	\
-		v->cap = initial_size;														\
-		v->len = 0;																	\
-		v;																			\
-	})
+#include "list.h"
+#include "map.h"
 
 char t (int i) {
     return i && !(i & (i - 1));
@@ -37,6 +19,25 @@ int main(int argc, char* argv[]) {
 
 	list(int) *v = list_new(int);
 
+    list_push(v, 42);
+    list_push(v, 64);
+
+    list_print(v);
+
+    hashmap_kvp(int);
+
+    hashmap(int) *m = hashmap_new(int);
+
+    char *key = "meaning of life";
+
+    struct hashmap_kvp_int *kvp;
+    
+    kvp = hashmap_get(m, key);
+
+    // hashmap_put(m, key, 42);
+
+    // hashmap_kvp(int) item = hashmap_get(m, "meaning of life");
+    
     #ifdef _DEBUG
     XWBReport("Done");
     #endif

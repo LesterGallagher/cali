@@ -17,7 +17,7 @@
 #define list_new(T)                                                           \
 ({                                                                           \
     const size_t initial_size = 16;                                           \
-    struct list_##T *v = malloc(sizeof(list_##T) + sizeof(T) * initial_size);	 \
+    struct list_##T *v = malloc(sizeof(list(T)) + sizeof(T) * initial_size);	 \
     v->cap = initial_size;                                                    \
     v->len = 0;                                                               \
     v;                                                                        \
